@@ -9,12 +9,16 @@ cloudinary.config({
     api_secret: process.env.API_SECRET_CLOUD
 });
 
-mongoose.connect(process.env.DATABASE_URL)
-.then(() => {
+mongoose.connect(process.env.DATABASE_URL, {
+    maxPoolSize: 10,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
     console.log("Conectado");
 }).catch((err) => {
     console.log("Error en la conexion");
-})
+});
+
 
 const connect = mongoose.connection
 module.exports = {
